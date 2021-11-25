@@ -1,8 +1,10 @@
-RPsec.describe 'POST, /api/article/:id', type: :request do
+RSpec.describe 'POST, /api/articles/:id/comments', type: :request do
   subject { response }
+  let!(:article) { create(:article) }
 
   before do
-    post '/api/article/:id'
+    post "/api/articles/#{article.id}/comments",
+         params: { article: { body: "Hello I'm a body to a comment" } }
   end
 
   describe 'when comments are posted successfully' do
